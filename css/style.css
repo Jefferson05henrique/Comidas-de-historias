@@ -70,22 +70,40 @@ nav {
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        /* margin: 100px; */
         padding: 20px;
     }
-
+ /* CARROUSEL */
     .mvv {
         padding: 50px;
     }
 
-    
-
-    .carousel-item img {
-    height: 300px; /* ajuste como quiser */
-    object-fit: cover;
+    .carrossel-container {
+    width: 100%;
+    max-width: 600px; 
+    margin: 0 auto;
+    overflow: hidden;
 }
 
+.carrossel-inner {
+    display: flex;
+    transition: transform 0.5s ease-in-out; 
+    width: 300%; 
+}
 
+.slide {
+    flex: 0 0 33.333%;
+    width: 33.333%;
+    height: auto;
+}
+
+.slide img {
+    width: 100%;
+    display: block;
+}
+
+/* CARROUSEL */
+
+/* OS MAIS PEDIDOS */
     .final {
         background-color: var(--FundoClaro);
         display: flex;
@@ -172,10 +190,19 @@ nav {
     transform: scale(1.05);
 }
 
+/* OS MAIS PEDIDOS */
+
 .direitos {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     text-align: center;
     background-color: var(--FundoClaro);
 }
+
+iframe {
+    border-radius: 15px;
+    width: 300px;
+    height: 300px;
+}
+
