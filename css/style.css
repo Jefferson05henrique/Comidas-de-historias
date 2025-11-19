@@ -240,11 +240,7 @@ iframe {
         padding: 5px;
     }
 
-    /* Oculta os itens de menu padrão em telas pequenas, exceto o logo */
-    nav ul li:not(:first-child) {
-        /* Considere usar um menu 'hamburguer' e esta classe para ocultar/mostrar */
-        /* Por simplicidade, vamos apenas garantir que o logo se destaque */
-    }
+
     
     .logo-header {
         margin-bottom: 10px; /* Espaçamento abaixo do logo */
