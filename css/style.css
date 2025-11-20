@@ -880,7 +880,7 @@ main {
   width: 100%;
   height: clamp(250px, 50vh, 420px);
   /* Altura responsiva entre 250px e 420px */
-  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSp1oa51ogZvVRO4cabSNzxEQzvkTyyM8p9A&s");
+  background-image: url("https://namu.com.br/portal/wp-content/uploads/2019/05/docinhos-.jpg");
   background-size: cover;
   /* Cobre toda área */
   background-position: center;
@@ -1477,7 +1477,7 @@ footer {
 }
 
 .footer-content {
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto 20px;
   display: grid;
   grid-template-columns: 2fr 1.5fr 1fr;
@@ -1776,7 +1776,7 @@ footer {
   .contato-esquerda p {
     font-size: 15px;
     margin-bottom: 20px;
-    text-align: center;
+    text-align: left;
   }
 
   /* Itens de informação centralizados */
