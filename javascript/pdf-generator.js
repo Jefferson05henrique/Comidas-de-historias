@@ -2,50 +2,62 @@
 
 // Dados do cardápio completo
 const cardapioCompleto = {
-  brigadeiros: [
-    { nome: 'Brigadeiro Tradicional', descricao: 'Chocolate ao leite com granulado', preco: 'R$ 3,50' },
-    { nome: 'Brigadeiro Gourmet', descricao: 'Chocolate belga com granulado artesanal', preco: 'R$ 5,00' },
-    { nome: 'Brigadeiro Branco', descricao: 'Chocolate branco com coco ralado', preco: 'R$ 4,50' },
-    { nome: 'Brigadeiro de Morango', descricao: 'Chocolate branco com morango desidratado', preco: 'R$ 5,00' },
-    { nome: 'Brigadeiro Pistache', descricao: 'Chocolate branco com pistache triturado', preco: 'R$ 6,00' },
+  docinhos: [
+    { nome: 'Brigadeiro Tradicional', preco: 'R$ 1,50', imagem: '../assets/img/galeria/brigadeiro_cardapio.png' },
+    { nome: 'Beijinho Tradicional', preco: 'R$ 1,50', imagem: '../assets/img/galeria/beijinho_cardapio.png' },
+    { nome: 'Brigadeiro de Churros', preco: 'R$ 1,80', imagem: '../assets/img/galeria/brigadeiro_churros_cardapio.png' },
+    { nome: 'Ninho com Nutella', preco: 'R$ 2,00', imagem: '../assets/img/galeria/brigadeiro_ninho_nutella_cardapio.png' },
+    { nome: 'Casadinho', preco: 'R$ 2,00', imagem: '../assets/img/galeria/casadinho_cardapio.png' },
   ],
-  bolos: [
-    { nome: 'Bolo de Chocolate', descricao: 'Massa de chocolate com ganache', preco: 'R$ 85,00' },
-    { nome: 'Bolo de Cenoura', descricao: 'Tradicional com cobertura de chocolate', preco: 'R$ 75,00' },
-    { nome: 'Bolo de Fubá', descricao: 'Fofinho com erva-doce', preco: 'R$ 65,00' },
-    { nome: 'Bolo Red Velvet', descricao: 'Massa vermelha com cream cheese', preco: 'R$ 95,00' },
-    { nome: 'Bolo de Limão', descricao: 'Massa leve com cobertura de limão siciliano', preco: 'R$ 80,00' },
-  ],
-  tortas: [
-    { nome: 'Torta de Morango', descricao: 'Creme fresco e morangos selecionados', preco: 'R$ 120,00' },
-    { nome: 'Torta de Limão', descricao: 'Merengue suíço e base crocante', preco: 'R$ 110,00' },
-    { nome: 'Torta de Maracujá', descricao: 'Creme azedinho e base de biscoito', preco: 'R$ 115,00' },
-    { nome: 'Cheesecake', descricao: 'Tradicional com calda de frutas vermelhas', preco: 'R$ 130,00' },
-  ],
-  brownies: [
-    { nome: 'Brownie Tradicional', descricao: 'Chocolate meio amargo', preco: 'R$ 35,00' },
-    { nome: 'Brownie com Nozes', descricao: 'Chocolate meio amargo com nozes caramelizadas', preco: 'R$ 40,00' },
-    { nome: 'Brownie de Doce de Leite', descricao: 'Recheado com doce de leite argentino', preco: 'R$ 42,00' },
-  ],
-  cookies: [
-    { nome: 'Cookie Chocolate Chips', descricao: 'Gotas de chocolate ao leite e meio amargo', preco: 'R$ 8,00' },
-    { nome: 'Cookie Red Velvet', descricao: 'Massa vermelha com gotas de chocolate branco', preco: 'R$ 9,00' },
-    { nome: 'Cookie de Aveia', descricao: 'Integral com passas e canela', preco: 'R$ 7,00' },
-    { nome: 'Cookie Nutella', descricao: 'Recheado com Nutella', preco: 'R$ 10,00' },
-  ],
+ 
   outros: [
-    { nome: 'Pudim de Leite', descricao: 'Tradicional com calda de caramelo', preco: 'R$ 50,00' },
-    { nome: 'Pavê de Chocolate', descricao: 'Camadas de biscoito e creme', preco: 'R$ 60,00' },
-    { nome: 'Quindim', descricao: 'Tradicional com coco', preco: 'R$ 5,00/un' },
-    { nome: 'Pão de Mel', descricao: 'Coberto com chocolate ao leite', preco: 'R$ 6,00/un' },
-    { nome: 'Doce de Leite Caseiro', descricao: 'Pote de 300g', preco: 'R$ 25,00' },
-  ]
+    { nome: 'Copinho de Chocolate', preco: 'R$ 2,50', imagem: '../assets/img/galeria/copinho_chocolate_cardapio.png' },
+    { nome: 'Cupcake', preco: 'R$ 6,00', imagem: '../assets/img/galeria/cupcake_sonic_cardapio.png' },
+    { nome: 'Pão de Mel Decorado', preco: 'R$ 15,00', imagem: '../assets/img/galeria/pao_de_mel_abelha_cardapio.png' },
+    { nome: 'Pirulito de Chocolate', preco: 'R$ 6,50', imagem: '../assets/img/galeria/pirulito_chocolate_5_cardapio.png' },
+    { nome: 'Mini Brownie', preco: 'R$ 2,80', imagem: '../assets/img/galeria/mini_brownie_cardapio.png' },
+    { nome: 'Trufa Personalizada', preco: 'R$ 4,50', imagem: '../assets/img/galeria/trufa_personalizada_cardapio.png' },
+    { nome: 'Morango do Amor', preco: 'R$ 10,00', imagem: '../assets/img/galeria/morango_do_amor_cardapio.png' },
+  ],
 };
 
-// Função para gerar o PDF
-function gerarCardapioPDF() {
+// Função para gerar o PDF (agora suporta carregar logo assíncrono)
+async function gerarCardapioPDF(logoSrc = '../assets/img/logo.png') {
   const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
+  // Carrega a imagem do logo e retorna data quando pronta
+  function loadImage(src) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = () => resolve(img);
+      img.onerror = () => reject(new Error('Não foi possível carregar a imagem do logo: ' + src));
+      img.src = src;
+    });
+  }
+
+    const imageCache = new Map();
+
+  async function preloadImagesFromMenu(menuData) {
+    const paths = new Set();
+
+    Object.values(menuData).forEach(arr => {
+      arr.forEach(item => {
+        if (item.imagem) paths.add(item.imagem);
+      });
+    });
+
+    const promises = Array.from(paths).map(async (p) => {
+      try {
+        const imgEl = await loadImage(p);
+        imageCache.set(p, imgEl);
+      } catch (err) {
+        // falha ao carregar imagem do item: registra e continua (fallback)
+        console.warn('Imagem do item não carregada:', p, err);
+      }
+    });
+
+    await Promise.all(promises);
+  }
 
   // Cores do tema
   const corPrincipal = [65, 45, 36]; // Marrom escuro
@@ -54,28 +66,45 @@ function gerarCardapioPDF() {
 
   let yPosition = 20;
 
+  const doc = new jsPDF();
+
   // CABEÇALHO
   doc.setFillColor(...corPrincipal);
   doc.rect(0, 0, 210, 40, 'F');
+
+  // Tentar carregar e desenhar o logo no canto superior esquerdo
+  try {
+    const img = await loadImage(logoSrc);
+    // Desenha o logo dentro do header (ajuste de tamanho se necessário)
+    // x:15, y:6 (dentro dos 40px do header), largura 28, altura 28
+    doc.addImage(img, 'PNG', 15, 6, 28, 28);
+  } catch (err) {
+    // Se falhar, continua sem logo (não interrompe geração)
+    // console.warn(err);
+  }
 
   // Título
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(28);
   doc.setFont('helvetica', 'bold');
-  doc.text("HAPUQUE'S DOCES", 105, 20, { align: 'center' });
+  doc.text("HAPUQUE'S DOCES", 105, 15, { align: 'center' });
 
   // Subtítulo
   doc.setFontSize(12);
   doc.setFont('helvetica', 'italic');
-  doc.text('Feito à Mão, para tocar o coração.', 105, 28, { align: 'center' });
+  doc.text('Feito à Mão, para tocar o coração.', 105, 24, { align: 'center' });
 
   // Informações de contato
   doc.setFontSize(9);
   doc.setFont('helvetica', 'normal');
-  doc.text('Rua Vinte e Dois de Agosto, 201 - Vila Bela Vista, SP', 105, 35, { align: 'center' });
-  doc.text('Tel: (11) 2227-8700  |  Instagram: @hapuques_doces', 105, 39, { align: 'center' });
+  doc.text('Rua Vinte e Dois de Agosto, 201 - Vila Bela Vista, SP', 105, 31, { align: 'center' });
+  doc.text('Tel: (11) 2227-8700  |  Instagram: @hapuques_doces', 105, 35, { align: 'center' });
 
   yPosition = 50;
+
+  
+  // Precarrega imagens dos itens antes de desenhar categorias
+  await preloadImagesFromMenu(cardapioCompleto);
 
   // Função auxiliar para adicionar categoria
   function adicionarCategoria(titulo, itens) {
@@ -93,57 +122,69 @@ function gerarCardapioPDF() {
     doc.setFontSize(14);
     doc.setFont('helvetica', 'bold');
     doc.text(titulo.toUpperCase(), 20, yPosition + 2);
-    
-    yPosition += 12;
+
+    // Reduz espaço entre o cabeçalho e o primeiro item para ficar igual aos demais
+    yPosition += 6;
 
     // Itens da categoria
     doc.setTextColor(...corTexto);
     doc.setFontSize(10);
 
     itens.forEach((item, index) => {
-      // Verificar espaço para novo item
-      if (yPosition > 270) {
+      // Tamanho da thumbnail (se houver)
+      const thumbW = 18;
+      const thumbH = 18;
+      const gapAfterThumb = 6;
+
+      // Define altura da linha do item (imagem + folga total)
+      const rowHeight = thumbH + 0; // imagem + 6mm de folga total (3mm em cima/baixo)
+
+      // Antes de desenhar, checar quebra de página considerando a altura da linha inteira
+      if (yPosition + rowHeight > 270) {
         doc.addPage();
         yPosition = 20;
       }
 
-      // Nome do item (negrito)
-      doc.setFont('helvetica', 'bold');
-      doc.text(item.nome, 20, yPosition);
+      // Topo e centro da linha
+      const rowTopY = yPosition;
+      const centerY = rowTopY + rowHeight / 2;
 
-      // Preço (alinhado à direita)
+      // Posições: imagem alinhada ao centro da linha, texto também centralizado verticalmente
+      let textX = 20;
+      if (item.imagem && imageCache.has(item.imagem)) {
+        const imgEl = imageCache.get(item.imagem);
+        const imgY = centerY - (thumbH / 2);
+        try {
+          doc.addImage(imgEl, 'PNG', 20, imgY, thumbW, thumbH);
+          textX = 20 + thumbW + gapAfterThumb;
+        } catch (err) {
+          console.warn('Falha ao inserir imagem no PDF para', item.nome, err);
+        }
+      }
+
+      // Nome do item (negrito) e preço, ambos centralizados verticalmente na linha
+      const textY = centerY + 2; // pequeno ajuste para alinhar melhor visualmente
       doc.setFont('helvetica', 'bold');
+      doc.text(item.nome, textX, textY);
       const precoWidth = doc.getTextWidth(item.preco);
-      doc.text(item.preco, 190 - precoWidth, yPosition);
+      doc.text(item.preco, 190 - precoWidth, textY);
 
-      yPosition += 5;
-
-      // Descrição (itálico)
-      doc.setFont('helvetica', 'italic');
-      doc.setFontSize(9);
-      const descricaoLinhas = doc.splitTextToSize(item.descricao, 160);
-      doc.text(descricaoLinhas, 20, yPosition);
-
-      yPosition += descricaoLinhas.length * 4 + 3;
-
-      // Linha divisória (exceto último item)
+      // Linha divisória no final da linha (exceto último item)
+      yPosition = rowTopY + rowHeight;
       if (index < itens.length - 1) {
         doc.setDrawColor(200, 200, 200);
         doc.line(20, yPosition, 190, yPosition);
-        yPosition += 3;
+        yPosition += 3; // pequeno espaço após a linha
       }
     });
 
-    yPosition += 8;
+    // Após a categoria, deixar o mesmo espaçamento usado entre itens (3mm)
+    yPosition += 6;
   }
 
   // Adicionar todas as categorias
-  adicionarCategoria('BRIGADEIROS', cardapioCompleto.brigadeiros);
-  adicionarCategoria('BOLOS', cardapioCompleto.bolos);
-  adicionarCategoria('TORTAS', cardapioCompleto.tortas);
-  adicionarCategoria('BROWNIES', cardapioCompleto.brownies);
-  adicionarCategoria('COOKIES', cardapioCompleto.cookies);
-  adicionarCategoria('OUTROS DOCES', cardapioCompleto.outros);
+  adicionarCategoria('DOCINHOS', cardapioCompleto.docinhos);
+  adicionarCategoria('OUTROS', cardapioCompleto.outros);
 
   // RODAPÉ em todas as páginas
   const totalPages = doc.internal.getNumberOfPages();
@@ -171,6 +212,7 @@ function gerarCardapioPDF() {
   // Salvar o PDF
   const dataAtual = new Date().toLocaleDateString('pt-BR').replace(/\//g, '-');
   doc.save(`Cardapio_Hapuques_Doces_${dataAtual}.pdf`);
+  return Promise.resolve();
 }
 
 // Event listener para o botão
@@ -178,19 +220,20 @@ document.addEventListener('DOMContentLoaded', function() {
   const btnGerarPDF = document.getElementById('btnGerarPDF');
   
   if (btnGerarPDF) {
-    btnGerarPDF.addEventListener('click', function(e) {
+    btnGerarPDF.addEventListener('click', async function(e) {
       e.preventDefault();
       
       // Feedback visual
       const textoOriginal = this.innerHTML;
       this.innerHTML = '⏳ Gerando PDF...';
       this.disabled = true;
-      
+
       // Pequeno delay para dar feedback visual
-      setTimeout(() => {
+      setTimeout(async () => {
         try {
-          gerarCardapioPDF();
-          
+          // Chama a função assíncrona que carrega o logo internamente
+          await gerarCardapioPDF();
+
           // Feedback de sucesso
           this.innerHTML = '✅ PDF Gerado!';
           setTimeout(() => {
